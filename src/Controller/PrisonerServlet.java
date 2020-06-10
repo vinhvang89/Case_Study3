@@ -32,16 +32,70 @@ public class PrisonerServlet extends HttpServlet {
                         throwables.printStackTrace();
                     }
                     break;
-                case "edit":
-                    editPrisoner(request,response);
+                case "editPrivateInform":
+                    try {
+                        editPrivateInform(request,response);
+                    } catch (SQLException | ClassNotFoundException throwables) {
+                        throwables.printStackTrace();
+                    }
                     break;
-
+                case "editCrimeInform":
+                    try {
+                        editCrimeInform(request,response);
+                    } catch (SQLException | ClassNotFoundException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    break;
+                case "editCellRoom":
+                    try {
+                        editCellRoom(request,response);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    break;
 
             }
     }
 
-    private void editPrisoner(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("edit.jsp");
+    private void editCellRoom(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String cellRoom = request.getParameter("cellRoom");
+        prisonerDAO.updateJailRoom(new Prisoner(id,cellRoom));
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("editCellRoom.jsp");
+        requestDispatcher.forward(request,response);
+    }
+
+    private void editCrimeInform(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Prisoner prisoner = new Prisoner();
+        prisoner.setId(id);
+        String crime = request.getParameter("crime");
+        String date_arrived = request.getParameter("date_arrived");
+        String date_departure = request.getParameter("date_departure");
+        String judgment = request.getParameter("judgment");
+        String other = request.getParameter("other");
+
+        prisoner.setCrimeInform(new CrimeInform(crime, date_arrived,date_departure, judgment, other));
+        prisonerDAO.updateCrimeInform(prisoner);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("editCrimeInfo.jsp");
+        requestDispatcher.forward(request,response);
+    }
+
+    private void editPrivateInform(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Prisoner prisoner = new Prisoner();
+        prisoner.setId(id);
+        String name = request.getParameter("name");
+        int age = Integer.parseInt(request.getParameter("age"));
+        double height = Double.parseDouble(request.getParameter("height"));
+        double weight = Double.parseDouble(request.getParameter("weight"));
+        String address = request.getParameter("address");
+        String identification = request.getParameter("identification");
+        prisoner.setPrivateInform(new PrivateInform(name,age,height,weight,address,identification));
+        prisonerDAO.updatePrivateInform(prisoner);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("editPrivateInform.jsp");
         requestDispatcher.forward(request,response);
     }
 
@@ -76,16 +130,19 @@ public class PrisonerServlet extends HttpServlet {
             case "create":
                 showCreateForm(request,response);
                 break;
-            case "edit":
-                showEditForm(request,response);
+            case "editPrivateInform":
+                showEditPrivateInform(request,response);
+                break;
+            case "editCrimeInform":
+                showEditCrimeInform(request,response);
+            case "editCellRoom":
+                showEditCellRoom(request,response);
                 break;
             case "delete":
                 try {
                     deletePrisoner(request,response);
-                } catch (SQLException throwables) {
+                } catch (SQLException | ClassNotFoundException throwables) {
                     throwables.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
                 }
                 break;
             default:
@@ -101,6 +158,16 @@ public class PrisonerServlet extends HttpServlet {
 
     }
 
+    private void showEditCellRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("editCellRoom.jsp");
+        requestDispatcher.forward(request,response);
+    }
+
+    private void showEditCrimeInform(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("editCrimeInfo.jsp");
+        requestDispatcher.forward(request,response);
+    }
+
     private void deletePrisoner(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         prisonerDAO.deletePrisonerById(id);
@@ -109,8 +176,8 @@ public class PrisonerServlet extends HttpServlet {
 
     }
 
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("edit.jsp");
+    private void showEditPrivateInform(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("editPrivateInform.jsp");
         requestDispatcher.forward(request,response);
     }
 
