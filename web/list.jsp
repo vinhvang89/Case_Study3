@@ -29,7 +29,7 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="http://localhost:8080/index.jsp">Trang chủ</a>
+                    <a class="nav-link" href="http://localhost:8080/">Trang chủ</a>
                 </li>
 
                 <li class="nav-item">

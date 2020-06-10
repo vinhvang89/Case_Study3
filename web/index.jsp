@@ -11,6 +11,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+  <a href="http://localhost:8080/prisoners?action=showAll">Link</a>
   </body>
 </html>
