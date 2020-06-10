@@ -32,12 +32,13 @@ public class PrisonerDAO implements iDAO {
     public void updateCrimeInform(Prisoner prisoner) throws SQLException, ClassNotFoundException {
         String update = "update crime_inform set crime=?,date_arrived=?,date_departure=?,judgment=?,other=? where id_prisoner=?;";
         Connection connection = getConnection();
+        CrimeInform crimeInform = prisoner.getCrimeInform();
         PreparedStatement preparedStatement = connection.prepareStatement(update);
-        preparedStatement.setString(1,prisoner.getCrime());
-        preparedStatement.setString(2,prisoner.getDate_arrived());
-        preparedStatement.setString(3,prisoner.getDate_departure());
-        preparedStatement.setString(4,prisoner.getJudgment());
-        preparedStatement.setString(5,prisoner.getOther());
+        preparedStatement.setString(1,crimeInform.getCrime());
+        preparedStatement.setString(2,crimeInform.getDate_arrived());
+        preparedStatement.setString(3,crimeInform.getDate_departure());
+        preparedStatement.setString(4,crimeInform.getJudgment());
+        preparedStatement.setString(5,crimeInform.getOther());
         preparedStatement.setInt(6,prisoner.getId());
         preparedStatement.executeUpdate();
     }
@@ -46,13 +47,14 @@ public class PrisonerDAO implements iDAO {
     public void updatePrivateInform(Prisoner prisoner) throws SQLException, ClassNotFoundException {
         String update = "update private_inform set name=?,age=?,height=?,weight=?,address=?,identification=? where id_prisoner =?;";
         Connection connection = getConnection();
+        PrivateInform privateInform = prisoner.getPrivateInform();
         PreparedStatement preparedStatement = connection.prepareStatement(update);
-        preparedStatement.setString(1,prisoner.getName());
-        preparedStatement.setInt(2,prisoner.getAge());
-        preparedStatement.setDouble(3,prisoner.getHeight());
-        preparedStatement.setDouble(4,prisoner.getWeight());
-        preparedStatement.setString(5,prisoner.getAddress());
-        preparedStatement.setString(6,prisoner.getIdentification());
+        preparedStatement.setString(1,privateInform.getName());
+        preparedStatement.setInt(2,privateInform.getAge());
+        preparedStatement.setDouble(3,privateInform.getHeight());
+        preparedStatement.setDouble(4,privateInform.getWeight());
+        preparedStatement.setString(5,privateInform.getAddress());
+        preparedStatement.setString(6,privateInform.getIdentification());
         preparedStatement.executeUpdate();
     }
 
@@ -79,7 +81,7 @@ public class PrisonerDAO implements iDAO {
     @Override
     public Prisoner getCrimeInformById(int id) throws SQLException, ClassNotFoundException {
         String get = "Select * from crime_inform where id_prisoner=?;";
-        Prisoner prisoner = null;
+        Prisoner prisoner = new Prisoner();
         PreparedStatement preparedStatement = getConnection().prepareStatement(get);
         preparedStatement.setInt(1,id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -89,7 +91,7 @@ public class PrisonerDAO implements iDAO {
             String date_departure = resultSet.getString("date_departure");
             String judgment = resultSet.getString("judgment");
             String other = resultSet.getString("other");
-            prisoner = new Prisoner(crime,date_arrived,date_departure,judgment,other);
+            prisoner.setCrimeInform(new CrimeInform(crime,date_arrived,date_departure,judgment,other));
         }
         return prisoner;
     }
@@ -97,7 +99,7 @@ public class PrisonerDAO implements iDAO {
     @Override
     public Prisoner getPrivateInformById(int id) throws SQLException, ClassNotFoundException {
         String getInfo = "Select * from private_inform where id_prisoner = ?;";
-        Prisoner prisoner = null;
+        Prisoner prisoner = new Prisoner();
         PreparedStatement preparedStatement = getConnection().prepareStatement(getInfo);
         preparedStatement.setInt(1,id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -108,14 +110,14 @@ public class PrisonerDAO implements iDAO {
             double weight = resultSet.getDouble("weight");
             String address = resultSet.getString("address");
             String identification = resultSet.getString("identification");
-            prisoner = new Prisoner(name, age, height, weight, address, identification);
+            prisoner.setPrivateInform(new PrivateInform(name, age, height, weight, address, identification));
         }
         return prisoner;
     }
 
     @Override
     public List<Prisoner> getAllPrisoners() throws SQLException, ClassNotFoundException {
-        String getAll ="select * from prisoners";
+        String getAll ="select * from all_prisoners";
         List<Prisoner> prisoners = new ArrayList<>();
         Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(getAll);
@@ -123,7 +125,21 @@ public class PrisonerDAO implements iDAO {
         while (resultSet.next()){
             int id = resultSet.getInt("id");
             String cellRoom = resultSet.getString("cellRoom");
-            prisoners.add(new Prisoner(id,cellRoom));
+            String crime = resultSet.getString("crime");
+            String date_arrived = resultSet.getString("date_arrived");
+            String date_departure = resultSet.getString("judgment");
+            String other = resultSet.getString("other");
+            String judgment = resultSet.getString("judgment");
+            String name = resultSet.getString("name");
+            int age = resultSet.getInt("age");
+            double height = resultSet.getDouble("height");
+            double weight = resultSet.getDouble("weight");
+            String address = resultSet.getString("address");
+            String identification = resultSet.getString("identification");
+            Prisoner prisoner = new Prisoner(id,cellRoom);
+            prisoner.setPrivateInform(new PrivateInform(name,age,height,weight,address,identification));
+            prisoner.setCrimeInform(new CrimeInform(crime,date_arrived,date_departure,judgment,other));
+            prisoners.add(prisoner);
         }
         return  prisoners;
     }
