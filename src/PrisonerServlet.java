@@ -34,26 +34,10 @@ public class PrisonerServlet extends HttpServlet {
                 }
                 break;
             case "updateJailRoom":
-                updateJailRoom(request,response);
             default:
                 break;
         }
-
-//        try {
-//            request.setAttribute("list",prisonerDAO.getAllPrisoners());
-//        } catch (SQLException | ClassNotFoundException throwable) {
-//            throwable.printStackTrace();
-//        }
-
-//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
-//        requestDispatcher.forward(request,response);
-
     }
-
-    private void updateJailRoom(HttpServletRequest request, HttpServletResponse response) {
-
-    }
-
     private void showAllPrisoner(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         request.setAttribute("list",prisonerDAO.getAllPrisoners());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
