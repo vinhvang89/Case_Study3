@@ -12,7 +12,7 @@ public class PrisonerDAO implements iDAO {
     protected  Connection getConnection() throws ClassNotFoundException, SQLException {
         String url = "jdbc:mysql://localhost:3306/mod3?useSSL=false";
         String username = "root";
-        String password = "1234";
+        String password = "zxcvb";
         Connection connection = null;
         Class.forName("com.mysql.cj.jdbc.Driver");
         return  connection = DriverManager.getConnection(url,username,password);
