@@ -38,16 +38,6 @@ public class PrisonerServlet extends HttpServlet {
             default:
                 break;
         }
-
-//        try {
-//            request.setAttribute("list",prisonerDAO.getAllPrisoners());
-//        } catch (SQLException | ClassNotFoundException throwable) {
-//            throwable.printStackTrace();
-//        }
-
-//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
-//        requestDispatcher.forward(request,response);
-
     }
 
     private void updateJailRoom(HttpServletRequest request, HttpServletResponse response) {
