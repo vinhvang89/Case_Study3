@@ -51,7 +51,7 @@ public class PrisonerServlet extends HttpServlet {
     }
 
     private void updateJailRoom(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute();
+
     }
 
     private void showAllPrisoner(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
