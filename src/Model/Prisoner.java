@@ -8,6 +8,7 @@ public class Prisoner {
     private double height;
     private double weight;
     private String address;
+
     private String identification;
     private String crime;
     private String date_arrived;

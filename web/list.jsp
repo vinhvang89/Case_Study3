@@ -9,16 +9,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>V.T.Jail - Danh sách tù nhân</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="css2/style.css">
 </head>
 <body>
 <div id="--header">
     <nav id="--navbar" class="navbar navbar-expand-lg navbar-light bg-transparent">
         <%--        <a class="navbar-brand" href="#">Vinh Trung Ngục</a>--%>
-        <img src="img/Reapers.png" width="50" height="50">
+        <img src="imgs/Reapers.png" width="50" height="50">
         <h4 style="color: #002752; margin-left: 10px">V . T . Jail</h4>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Danh sách</a>
+                    <a class="nav-link" href="http://localhost:8080/abc?action=showAll">Danh sách</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -58,13 +58,13 @@
 
 <div id="--body">
     <div class="sidenav">
-        <a href="#about">Danh sách tù nhân</a>
+        <a href="http://localhost:8080/abc?action=showAll">Danh sách tù nhân</a>
         <a href="#services">Thêm tù nhân</a>
         <a href="#contact">Phiếu đánh giá</a>
     </div>
     <div id="--body-content">
         <div id="--body-content-title">
-            <h2>This is list</h2>
+            <h2>Danh sách các anh hùng</h2>
         </div>
         <div id="--body-content-table">
             <table border="1" cellpadding="5">

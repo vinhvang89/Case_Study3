@@ -5,8 +5,14 @@
 #--body{
     background-color: whitesmoke;
     height: 100%;
+    width: 100%;
+    display: inline-flex;
 }
-#--body .--content-left {
+#--body-index{
+    background-color: whitesmoke;
+    height: 100%;
+}
+.--content-left {
     padding-top: 20px;
     margin-left: 1%;
     width: 15%;
@@ -18,7 +24,7 @@
     /*display: inline-block;*/
     height: 100%;
 }
-#--body .--content-center {
+ .--content-center {
     padding-top: 20px;
     padding-left:20px ;
     width: 68%;
@@ -34,15 +40,15 @@
     height: 100%;
     /*background-color: red;*/
 }
-​
+
 .--content-center-news{
     display: inline;
 }
-​
+
 .--content-center-news div{
     float: left;
 }
-​
+
 #--body .--content-center-news-thumbnail{
     height: 120px;
     width: 180px;
@@ -68,18 +74,18 @@
 #--footer h6{
     padding-top: 20px;
 }
-​
+
 #--search{
     color: #383d41;
 }
 h6{
     font-size: 10px;
 }
-​
-​
-​
-​
-​
+
+
+
+
+
 #--body-create{
     display: inline;
 }
@@ -94,7 +100,7 @@ h6{
     overflow-x: hidden;
     padding-top: 20px;
 }
-​
+
 .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -102,11 +108,37 @@ h6{
     color: #818181;
     display: block;
 }
-​
+
 .sidenav a:hover {
     color: #f1f1f1;
 }
-​
+
 #--create{
     float: left;
+}
+
+#--body-content{
+ padding-left: 20px;
+}
+#--body-content > h2{
+    align-items: center;
+    margin: auto;
+}
+#--body-content-title{
+    text-align: center;
+}
+#--body-content-table{
+
+}
+
+#--body-create-form{
+    width: 1000px;
+    /*background-color: #7abaff;*/
+    margin-left: 300px;
+    margin-top: 20px;
+}
+
+.form-group .form-row{
+    /*width: 100%;*/
+    /*background-color: #0b2e13;*/
 }

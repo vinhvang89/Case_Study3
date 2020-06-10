@@ -2,19 +2,20 @@
   Created by IntelliJ IDEA.
   User: ADMIN
   Date: 6/10/2020
-  Time: 8:12 AM
+  Time: 3:03 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>V.T.Jail - Thêm tù nhân mới</title>
+    <title>V.T.Jail - Chỉnh sửa thông tin tù nhân</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css2/style.css">
-<%--    <link rel="stylesheet" href="css/style.css">--%>
 </head>
+<body>
+
 <body>
 
 <div id="--header">
@@ -72,74 +73,35 @@
 
             <div class="form-row">
                 <div class="form-group col-lg-6">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" placeholder="ID">
-                </div>
-                <div class="form-group col-lg-6">
-                    <label for="cellRoom">Room</label>
-                    <input type="text" class="form-control" id="cellRoom" name="cellRoom" placeholder="Room">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-lg-8">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Name">
                 </div>
-                <div class="form-group col-lg-4">
+                <div class="form-group col-lg-6">
                     <label for="age">Age</label>
                     <input type="text" class="form-control" id="age" name="age" placeholder="Age">
                 </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-lg-8">
-                    <label for="height">Height</label>
-                    <input type="text" class="form-control" id="height" name="height">
+                <div class="form-group col-lg-6">
+                    <label for="height">Date departure</label>
+                    <input type="text" class="form-control" id="height" name="height" placeholder="Height">
                 </div>
-                <div class="form-group col-lg-4">
-                    <label for="weight">Height</label>
-                    <input type="text" class="form-control" id="weight" name="weight">
+                <div class="form-group col-lg-6">
+                    <label for="weight">Judgment</label>
+                    <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight">
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" name="address">
-            </div>
-
-            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                </div>
                 <div class="form-group col-lg-6">
                     <label for="identification">Identification</label>
                     <input type="text" class="form-control" id="identification" name="identification" placeholder="Identification">
                 </div>
-                <div class="form-group col-lg-6">
-                    <label for="crime">Crime</label>
-                    <input type="text" class="form-control" id="crime" name="crime" placeholder="Crime">
-                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Edit</button>
             </div>
 
-            <div class="form-row">
-                <div class="form-group col-lg-6">
-                    <label for="date_arrived">Date arrived</label>
-                    <input type="text" class="form-control" id="date_arrived" name="date_arrived" placeholder="Date arrived">
-                </div>
-                <div class="form-group col-lg-6">
-                    <label for="date_departure">Date departure</label>
-                    <input type="text" class="form-control" id="date_departure" name="date_departure" placeholder="Date departure">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="judgment">Judgment</label>
-                <input type="text" class="form-control" id="judgment" name="judgment" placeholder="Judgment">
-            </div>
-            <div class="form-group">
-                <label for="other">Other</label>
-                <input type="text" class="form-control" id="other" name="other" placeholder="Other">
-            </div>
-            <div class="form-group">
-            <button type="submit" class="btn btn-primary">Create</button>
-            </div>
+
         </form>
     </div>
 </div>
