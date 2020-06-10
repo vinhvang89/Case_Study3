@@ -1,3 +1,5 @@
+package Controller;
+
 import Model.Prisoner;
 import Model.PrisonerDAO;
 
@@ -12,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "PrisonerServlet",urlPatterns = "/prisoners")
+@WebServlet(name = "Controller.PrisonerServlet",urlPatterns = "/prisoners")
 public class PrisonerServlet extends HttpServlet {
     private final PrisonerDAO prisonerDAO = new PrisonerDAO();
 

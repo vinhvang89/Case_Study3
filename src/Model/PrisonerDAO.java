@@ -117,7 +117,7 @@ public class PrisonerDAO implements iDAO {
 
     @Override
     public List<Prisoner> getAllPrisoners() throws SQLException, ClassNotFoundException {
-        String getAll ="select * from prisoners";
+        String getAll ="select * from all_prisoners";
         List<Prisoner> prisoners = new ArrayList<>();
         Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(getAll);
@@ -125,7 +125,21 @@ public class PrisonerDAO implements iDAO {
         while (resultSet.next()){
             int id = resultSet.getInt("id");
             String cellRoom = resultSet.getString("cellRoom");
-            prisoners.add(new Prisoner(id,cellRoom));
+            String crime = resultSet.getString("crime");
+            String date_arrived = resultSet.getString("date_arrived");
+            String date_departure = resultSet.getString("judgment");
+            String other = resultSet.getString("other");
+            String judgment = resultSet.getString("judgment");
+            String name = resultSet.getString("name");
+            int age = resultSet.getInt("age");
+            double height = resultSet.getDouble("height");
+            double weight = resultSet.getDouble("weight");
+            String address = resultSet.getString("address");
+            String identification = resultSet.getString("identification");
+            Prisoner prisoner = new Prisoner(id,cellRoom);
+            prisoner.setPrivateInform(new PrivateInform(name,age,height,weight,address,identification));
+            prisoner.setCrimeInform(new CrimeInform(crime,date_arrived,date_departure,judgment,other));
+            prisoners.add(prisoner);
         }
         return  prisoners;
     }

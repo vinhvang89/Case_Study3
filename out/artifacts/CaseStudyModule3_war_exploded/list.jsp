@@ -55,40 +55,40 @@
         </div>
     </nav>
 </div>
-<div>
+<div align="center">
     <h1>This is list</h1>
     <table border="1" cellpadding="5">
         <tr>
             <th>Id</th>
             <th>CellRoom</th>
-            <%--            <th>Name</th>--%>
-            <%--            <th>Age</th>--%>
-            <%--            <th>Height</th>--%>
-            <%--            <th>Weight</th>--%>
-            <%--            <th>Address</th>--%>
-            <%--            <th>Identification</th>--%>
-            <%--            <th>Crime</th>--%>
-            <%--            <th>Date Arrived</th>--%>
-            <%--            <th>Date Departed</th>--%>
-            <%--            <th>Judgment</th>--%>
-            <%--            <th>Other</th>--%>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Height</th>
+            <th>Weight</th>
+            <th>Address</th>
+            <th>Identification</th>
+            <th>Crime</th>
+            <th>Date Arrived</th>
+            <th>Date Departed</th>
+            <th>Judgment</th>
+            <th>Other</th>
         </tr>
         <%--        <jsp:useBean id="list" scope="request" type="java.util.List"/>--%>
         <c:forEach var="prisoner" items="${list}">
             <tr>
                 <td><c:out value="${prisoner.getId()}"/></td>
                 <td><c:out value="${prisoner.getCellRoom()}"/></td>
-                    <%--                <td><c:out value="${prisoner.name}"/></td>--%>
-                    <%--                <td><c:out value="${prisoner.age}"/></td>--%>
-                    <%--                <td><c:out value="${prisoner.height}"/></td>--%>
-                    <%--                <td><c:out value="${prisoner.weight}"/></td>--%>
-                    <%--                <td><c:out value="${prisoner.address}"/></td>--%>
-                    <%--                <td><c:out value="${prisoner.identification}"/></td>--%>
-                    <%--                <td><c:out value="${prisoner.crime}"/></td>--%>
-                    <%--                <td><c:out value="${prisoner.date_arrived}"/></td>--%>
-                    <%--                <td><c:out value="${prisoner.date_departure}"/></td>--%>
-                    <%--                <td><c:out value="${prisoner.judgment}"/></td>--%>
-                    <%--                <td><c:out value="${prisoner.other}"/></td>--%>
+                <td><c:out value="${prisoner.getPrivateInform().getName()}"/></td>
+                <td><c:out value="${prisoner.getPrivateInform().getAge()}"/></td>
+                <td><c:out value="${prisoner.getPrivateInform().getHeight()}"/></td>
+                <td><c:out value="${prisoner.getPrivateInform().getWeight()}"/></td>
+                <td><c:out value="${prisoner.getPrivateInform().getAddress()}"/></td>
+                <td><c:out value="${prisoner.getPrivateInform().getIdentification()}"/></td>
+                <td><c:out value="${prisoner.getCrimeInform().getCrime()}"/></td>
+                <td><c:out value="${prisoner.getCrimeInform().getDate_arrived()}"/></td>
+                <td><c:out value="${prisoner.getCrimeInform().getDate_departure()}"/></td>
+                <td><c:out value="${prisoner.getCrimeInform().getJudgment()}"/></td>
+                <td><c:out value="${prisoner.getCrimeInform().getOther()}"/></td>
             </tr>
         </c:forEach>
     </table>
