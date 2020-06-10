@@ -12,9 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "PrisonerServlet",urlPatterns = "/abc")
+@WebServlet(name = "PrisonerServlet",urlPatterns = "/prisoners")
 public class PrisonerServlet extends HttpServlet {
     private final PrisonerDAO prisonerDAO = new PrisonerDAO();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -22,13 +23,13 @@ public class PrisonerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        if (action == null){
+        if (action == null) {
             action = "";
         }
-        switch (action){
+        switch (action) {
             case "showAll":
                 try {
-                    showAllPrisoner(request,response);
+                    showAllPrisoner(request, response);
                 } catch (SQLException | ClassNotFoundException throwables) {
                     throwables.printStackTrace();
                 }
@@ -38,9 +39,10 @@ public class PrisonerServlet extends HttpServlet {
                 break;
         }
     }
+
     private void showAllPrisoner(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
-        request.setAttribute("list",prisonerDAO.getAllPrisoners());
+        request.setAttribute("list", prisonerDAO.getAllPrisoners());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
-        requestDispatcher.forward(request,response);
+        requestDispatcher.forward(request, response);
     }
 }
