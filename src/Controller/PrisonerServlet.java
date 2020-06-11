@@ -37,15 +37,28 @@ public class PrisonerServlet extends HttpServlet {
             case "editCellRoom":
                 showEditCellRoomForm(request,response);
                 break;
+            case "editCrimeInform":
+                showEditCrimeInform(request,response);
+                break;
+            case "editPrivateInform":
+                showEditPrivateInform(request,response);
+                break;
         }
 
     }
 
+    private void showEditPrivateInform(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("editPrivateInform.jsp");
+        requestDispatcher.forward(request,response);
+    }
+    private void showEditCrimeInform(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("editCrimeInfo.jsp");
+        requestDispatcher.forward(request,response);
+    }
     private void showEditCellRoomForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("editCellRoom.jsp");
         requestDispatcher.forward(request,response);
     }
-
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("create.jsp");
         requestDispatcher.forward(request,response);
@@ -56,11 +69,20 @@ public class PrisonerServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
         requestDispatcher.forward(request,response);
     }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if(action == null)
             action="";
         switch (action){
+//            case "showAll":
+//                try {
+//                    showList(request,response);
+//                } catch (SQLException throwables) {
+//                    throwables.printStackTrace();
+//                } catch (ClassNotFoundException e) {
+//                    e.printStackTrace();
+//                }
             case "create":
                 try {
                     createNewPrisoner(request,response);
@@ -77,11 +99,71 @@ public class PrisonerServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
+            case "editCrimeInform":
+                try {
+                    editCrimeInform(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "editPrivateInform":
+                try {
+                    editPrivateInform(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
 
         }
 
     }
 
+
+
+    private void editPrivateInform(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
+        Prisoner prisoner = new Prisoner();
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        int age = Integer.parseInt(request.getParameter("age"));
+        double height = Double.parseDouble(request.getParameter("height"));
+        double weight = Double.parseDouble(request.getParameter("weight"));
+        String address = request.getParameter("address");
+        String identification = request.getParameter("identification");
+
+        prisoner.setName(name);
+        prisoner.setAge(age);
+        prisoner.setHeight(height);
+        prisoner.setWeight(weight);
+        prisoner.setAddress(address);
+        prisoner.setIdentification(identification);
+        prisoner.setId(id);
+        prisonerDAO.editCellRoom(prisoner);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
+        requestDispatcher.forward(request,response);
+    }
+    private void editCrimeInform(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
+        Prisoner prisoner = new Prisoner();
+        int id = Integer.parseInt(request.getParameter("id"));
+        String crime = request.getParameter("crime");
+        String date_arrived = request.getParameter("date_arrived");
+        String date_departure = request.getParameter("date_departure");
+        String judgment = request.getParameter("judgment");
+        String other = request.getParameter("other");
+
+        prisoner.setCrime(crime);
+        prisoner.setDate_arrived(date_arrived);
+        prisoner.setDate_departure(date_departure);
+        prisoner.setJudgment(judgment);
+        prisoner.setOther(other);
+        prisoner.setId(id);
+        prisonerDAO.editCellRoom(prisoner);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
+        requestDispatcher.forward(request,response);
+    }
     private void editCellRoom(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
         Prisoner prisoner = new Prisoner();
         int id = Integer.parseInt(request.getParameter("id"));
@@ -89,11 +171,11 @@ public class PrisonerServlet extends HttpServlet {
         prisoner.setCellRoom(cellRoom);
         prisoner.setId(id);
         prisonerDAO.editCellRoom(prisoner);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("editCellRoom.jsp");
-        requestDispatcher.forward(request,response);
+        response.sendRedirect("/prisoners?action=showAll");
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
+//        requestDispatcher.forward(request,response);
 
     }
-
     private void createNewPrisoner(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String cellRoom = request.getParameter("cellRoom");

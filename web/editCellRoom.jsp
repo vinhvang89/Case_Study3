@@ -48,7 +48,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/abc?action=showAll">Danh sách</a>
+                    <a class="nav-link" href="http://localhost:8080/prisoners?action=showAll">Danh sách</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -62,8 +62,8 @@
 
 <div id="--body">
     <div class="sidenav">
-        <a href="http://localhost:8080/abc?action=showAll">Danh sách tù nhân</a>
-        <a href="#services">Thêm tù nhân</a>
+        <a href="http://localhost:8080/prisoners?action=showAll">Danh sách tù nhân</a>
+        <a href="http://localhost:8080/prisoners?action=create">Thêm tù nhân</a>
         <a href="#contact">Phiếu đánh giá</a>
     </div>
 
@@ -71,6 +71,7 @@
         <form id="--create" method="post">
             <div class="form-row">
                     <label for="cellRoom">New cell room</label>
+                    <p></p>
                     <input type="text" class="form-control" id="cellRoom" name="cellRoom" placeholder="Cell room">
             </div><br/>
             <div class="form-group">
