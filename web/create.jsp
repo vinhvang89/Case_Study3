@@ -67,7 +67,7 @@
     </div>
 
     <div id="--body-create-form">
-        <form id="--create">
+        <form method="post" action="/prisoners" id="--create">
 
 
             <div class="form-row">

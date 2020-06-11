@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet(name = "Controller.PrisonerServlet",urlPatterns = "/prisoners")
 public class PrisonerServlet extends HttpServlet {
@@ -49,10 +47,8 @@ public class PrisonerServlet extends HttpServlet {
                 case "editCellRoom":
                     try {
                         editCellRoom(request,response);
-                    } catch (SQLException throwables) {
+                    } catch (SQLException | ClassNotFoundException throwables) {
                         throwables.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
                     }
                     break;
 
@@ -145,13 +141,18 @@ public class PrisonerServlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
-            default:
+            case "showAll":
                 try {
                     showAllPrisoner(request, response);
                 } catch (SQLException | ClassNotFoundException throwables) {
                     throwables.printStackTrace();
                 }
                 break;
+            default:
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+                requestDispatcher.forward(request,response);
+                break;
+
         }
 
 

@@ -127,7 +127,7 @@ public class PrisonerDAO implements iDAO {
             String cellRoom = resultSet.getString("cellRoom");
             String crime = resultSet.getString("crime");
             String date_arrived = resultSet.getString("date_arrived");
-            String date_departure = resultSet.getString("judgment");
+            String date_departure = resultSet.getString("date_departure");
             String other = resultSet.getString("other");
             String judgment = resultSet.getString("judgment");
             String name = resultSet.getString("name");
