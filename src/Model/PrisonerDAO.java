@@ -1,6 +1,5 @@
 package Model;
 
-import javax.servlet.RequestDispatcher;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,10 +93,41 @@ public class PrisonerDAO implements iDAO {
     }
 
     @Override
-    public void editPrisoner(Prisoner prisoner) throws SQLException, ClassNotFoundException {
+    public void editCellRoom(Prisoner prisoner) throws SQLException, ClassNotFoundException {
+        String edit = "update prisoners set cellRoom=? where id=?;";
         Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(edit);
+        preparedStatement.setString(1,prisoner.getCellRoom());
+        preparedStatement.setInt(2,prisoner.getId());
+        preparedStatement.executeUpdate();
+    }
 
+    @Override
+    public void editCrimeInform(Prisoner prisoner) throws SQLException, ClassNotFoundException {
+        String edit = "update prisoners set crime=?,date_arrived=?,date_departure=?,judgment=?,other=? where id=?;";
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(edit);
+        preparedStatement.setString(1,prisoner.getCrime());
+        preparedStatement.setString(2,prisoner.getDate_arrived());
+        preparedStatement.setString(3,prisoner.getDate_departure());
+        preparedStatement.setString(4,prisoner.getJudgment());
+        preparedStatement.setString(5,prisoner.getOther());
+        preparedStatement.setInt(6,prisoner.getId());
+        preparedStatement.executeUpdate();
+    }
 
-
+    @Override
+    public void editPrivateInform(Prisoner prisoner) throws SQLException, ClassNotFoundException {
+        String edit = "update prisoners set name=?,age=?,height=?,weight=?,address=?,identification=? where id=?;";
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(edit);
+        preparedStatement.setString(1,prisoner.getName());
+        preparedStatement.setInt(2,prisoner.getAge());
+        preparedStatement.setDouble(3,prisoner.getHeight());
+        preparedStatement.setDouble(4,prisoner.getWeight());
+        preparedStatement.setString(5,prisoner.getAddress());
+        preparedStatement.setString(6,prisoner.getIdentification());
+        preparedStatement.setInt(7,prisoner.getId());
+        preparedStatement.executeUpdate();
     }
 }

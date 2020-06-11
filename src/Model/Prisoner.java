@@ -15,6 +15,26 @@ public class Prisoner {
     private String judgment;
     private String other;
 
+    public Prisoner() {
+    }
+
+    public Prisoner(String name, int age, double height, double weight, String address, String identification) {
+        this.name = name;
+        this.age = age;
+        this.height = height;
+        this.weight = weight;
+        this.address = address;
+        this.identification = identification;
+    }
+
+    public Prisoner(String crime, String date_arrived, String date_departure, String judgment, String other) {
+        this.crime = crime;
+        this.date_arrived = date_arrived;
+        this.date_departure = date_departure;
+        this.judgment = judgment;
+        this.other = other;
+    }
+
     public Prisoner(int id, String cellRoom, String name, int age, double height, double weight, String address, String identification, String crime, String date_arrived, String date_departure, String judgment, String other) {
         this.id = id;
         this.cellRoom = cellRoom;

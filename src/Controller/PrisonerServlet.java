@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -33,8 +34,16 @@ public class PrisonerServlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
+            case "editCellRoom":
+                showEditCellRoomForm(request,response);
+                break;
         }
 
+    }
+
+    private void showEditCellRoomForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("editCellRoom.jsp");
+        requestDispatcher.forward(request,response);
     }
 
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -60,14 +69,28 @@ public class PrisonerServlet extends HttpServlet {
                 }
                 break;
             case "editCellRoom":
-                editCellRoom(request,response);
+                try {
+                    editCellRoom(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 break;
 
         }
 
     }
 
-    private void editCellRoom(HttpServletRequest request, HttpServletResponse response) {
+    private void editCellRoom(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
+        Prisoner prisoner = new Prisoner();
+        int id = Integer.parseInt(request.getParameter("id"));
+        String cellRoom = request.getParameter("cellRoom");
+        prisoner.setCellRoom(cellRoom);
+        prisoner.setId(id);
+        prisonerDAO.editCellRoom(prisoner);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("editCellRoom.jsp");
+        requestDispatcher.forward(request,response);
 
     }
 
