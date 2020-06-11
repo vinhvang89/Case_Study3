@@ -43,6 +43,16 @@ public class PrisonerServlet extends HttpServlet {
             case "editPrivateInform":
                 showEditPrivateInform(request,response);
                 break;
+            case "delete":
+                try {
+                    deletePrisonerById(request,response);
+//                    showList(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
 
     }
@@ -75,14 +85,6 @@ public class PrisonerServlet extends HttpServlet {
         if(action == null)
             action="";
         switch (action){
-//            case "showAll":
-//                try {
-//                    showList(request,response);
-//                } catch (SQLException throwables) {
-//                    throwables.printStackTrace();
-//                } catch (ClassNotFoundException e) {
-//                    e.printStackTrace();
-//                }
             case "create":
                 try {
                     createNewPrisoner(request,response);
@@ -117,12 +119,28 @@ public class PrisonerServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
+//            case "delete":
+//                try {
+//                    deletePrisonerById(request,response);
+//                } catch (SQLException throwables) {
+//                    throwables.printStackTrace();
+//                } catch (ClassNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//                break;
 
         }
 
     }
 
 
+    private void deletePrisonerById(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, IOException, ServletException {
+        int _id = Integer.parseInt(request.getParameter("id"));
+        prisonerDAO.deletePrisonerById(_id);
+        response.sendRedirect("/prisoners?action=showAll");
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
+//        requestDispatcher.forward(request,response);
+    }
 
     private void editPrivateInform(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
         Prisoner prisoner = new Prisoner();
@@ -141,7 +159,8 @@ public class PrisonerServlet extends HttpServlet {
         prisoner.setAddress(address);
         prisoner.setIdentification(identification);
         prisoner.setId(id);
-        prisonerDAO.editCellRoom(prisoner);
+        prisonerDAO.editPrivateInform(prisoner);
+//        response.sendRedirect("/prisoners?action=showAll");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
         requestDispatcher.forward(request,response);
     }
@@ -160,9 +179,10 @@ public class PrisonerServlet extends HttpServlet {
         prisoner.setJudgment(judgment);
         prisoner.setOther(other);
         prisoner.setId(id);
-        prisonerDAO.editCellRoom(prisoner);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
-        requestDispatcher.forward(request,response);
+        prisonerDAO.editCrimeInform(prisoner);
+        response.sendRedirect("/prisoners?action=showAll");
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
+//        requestDispatcher.forward(request,response);
     }
     private void editCellRoom(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
         Prisoner prisoner = new Prisoner();
@@ -192,7 +212,8 @@ public class PrisonerServlet extends HttpServlet {
         String other = request.getParameter("other");
         prisonerDAO.createPrisoner(new Prisoner(id,cellRoom,name,age,height,weight,address,
                 identification,crime,date_arrived,date_departure,judgment,other));
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
-        requestDispatcher.forward(request,response);
+        response.sendRedirect("/prisoners?action=showAll");
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
+//        requestDispatcher.forward(request,response);
     }
 }
