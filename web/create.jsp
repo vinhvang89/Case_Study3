@@ -61,13 +61,13 @@
 
 <div id="--body">
     <div class="sidenav">
-        <a href="http://localhost:8080/abc?action=showAll">Danh sách tù nhân</a>
-        <a href="#services">Thêm tù nhân</a>
+        <a href="http://localhost:8080/prisoners?action=showAll">Danh sách tù nhân</a>
+        <a href="http://localhost:8080/prisoners?action=create">Thêm tù nhân</a>
         <a href="#contact">Phiếu đánh giá</a>
     </div>
 
     <div id="--body-create-form">
-        <form id="--create">
+        <form id="--create" method="post" >
 
 
             <div class="form-row">
