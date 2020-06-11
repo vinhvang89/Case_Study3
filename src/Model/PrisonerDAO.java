@@ -1,5 +1,6 @@
 package Model;
 
+import javax.servlet.RequestDispatcher;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,5 +91,13 @@ public class PrisonerDAO implements iDAO {
           prisoners.add(prisoner);
         }
         return prisoners;
+    }
+
+    @Override
+    public void editPrisoner(Prisoner prisoner) throws SQLException, ClassNotFoundException {
+        Connection connection = getConnection();
+
+
+
     }
 }

@@ -100,8 +100,10 @@
                         <td><c:out value="${prisoner.getJudgment()}"/></td>
                         <td><c:out value="${prisoner.getOther()}"/></td>
                         <td>
-                            <a href="prisoners?action=edit&id=${prisoner.getId()}">Edit</a>
-                            <a href="prisoners?action=delete&id=${prisoner.getId()}">Delete</a>
+                            <a href="prisoners?action=editCellRoom&id=${prisoner.getId()}">Edit_Cell_Room</a>
+                            <a href="prisoners?action=editCrimeInform&id=${prisoner.getId()}">Edit_Crime_Inform</a>
+                            <a href="prisoners?action=editPrivateInform&id=${prisoner.getId()}">Edit_Private_Inform</a>
+                            <a href="prisoners?action=delete&id=${prisoner.getId()}">Delete_Prisoner</a>
                         </td>
                     </tr>
                 </c:forEach>
