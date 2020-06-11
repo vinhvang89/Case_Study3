@@ -95,7 +95,6 @@ public class PrisonerDAO implements iDAO {
         }
         return prisoner;
     }
-
     @Override
     public Prisoner getPrivateInformById(int id) throws SQLException, ClassNotFoundException {
         String getInfo = "Select * from private_inform where id_prisoner = ?;";
