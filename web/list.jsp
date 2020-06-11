@@ -82,23 +82,29 @@
                     <th>Date Departed</th>
                     <th>Judgment</th>
                     <th>Other</th>
+                    <th>Action</th>
                 </tr>
-                <%--        <jsp:useBean id="list" scope="request" type="java.util.List"/>--%>
                 <c:forEach var="prisoner" items="${list}">
                     <tr>
                         <td><c:out value="${prisoner.getId()}"/></td>
                         <td><c:out value="${prisoner.getCellRoom()}"/></td>
-                        <td><c:out value="${prisoner.getPrivateInform().getName()}"/></td>
-                        <td><c:out value="${prisoner.getPrivateInform().getAge()}"/></td>
-                        <td><c:out value="${prisoner.getPrivateInform().getHeight()}"/></td>
-                        <td><c:out value="${prisoner.getPrivateInform().getWeight()}"/></td>
-                        <td><c:out value="${prisoner.getPrivateInform().getAddress()}"/></td>
-                        <td><c:out value="${prisoner.getPrivateInform().getIdentification()}"/></td>
-                        <td><c:out value="${prisoner.getCrimeInform().getCrime()}"/></td>
-                        <td><c:out value="${prisoner.getCrimeInform().getDate_arrived()}"/></td>
-                        <td><c:out value="${prisoner.getCrimeInform().getDate_departure()}"/></td>
-                        <td><c:out value="${prisoner.getCrimeInform().getJudgment()}"/></td>
-                        <td><c:out value="${prisoner.getCrimeInform().getOther()}"/></td>
+                        <td><c:out value="${prisoner.getName()}"/></td>
+                        <td><c:out value="${prisoner.getAge()}"/></td>
+                        <td><c:out value="${prisoner.getHeight()}"/></td>
+                        <td><c:out value="${prisoner.getWeight()}"/></td>
+                        <td><c:out value="${prisoner.getAddress()}"/></td>
+                        <td><c:out value="${prisoner.getIdentification()}"/></td>
+                        <td><c:out value="${prisoner.getCrime()}"/></td>
+                        <td><c:out value="${prisoner.getDate_arrived()}"/></td>
+                        <td><c:out value="${prisoner.getDate_departure()}"/></td>
+                        <td><c:out value="${prisoner.getJudgment()}"/></td>
+                        <td><c:out value="${prisoner.getOther()}"/></td>
+                        <td>
+                            <a href="prisoners?action=editCellRoom&id=${prisoner.getId()}">Edit_Cell_Room</a>
+                            <a href="prisoners?action=editCrimeInform&id=${prisoner.getId()}">Edit_Crime_Inform</a>
+                            <a href="prisoners?action=editPrivateInform&id=${prisoner.getId()}">Edit_Private_Inform</a>
+                            <a href="prisoners?action=delete&id=${prisoner.getId()}">Delete_Prisoner</a>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
