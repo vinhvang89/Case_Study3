@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @WebServlet(name = "Controller.PrisonerServlet",urlPatterns = "/prisoners")
 public class PrisonerServlet extends HttpServlet {
@@ -49,10 +48,8 @@ public class PrisonerServlet extends HttpServlet {
                 case "editCellRoom":
                     try {
                         editCellRoom(request,response);
-                    } catch (SQLException throwables) {
+                    } catch (SQLException | ClassNotFoundException throwables) {
                         throwables.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
                     }
                     break;
 
@@ -71,13 +68,7 @@ public class PrisonerServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Prisoner prisoner = new Prisoner();
         prisoner.setId(id);
-        String crime = request.getParameter("crime");
-        String date_arrived = request.getParameter("date_arrived");
-        String date_departure = request.getParameter("date_departure");
-        String judgment = request.getParameter("judgment");
-        String other = request.getParameter("other");
-
-        prisoner.setCrimeInform(new CrimeInform(crime, date_arrived,date_departure, judgment, other));
+        setCrimeInformByParameter(request,prisoner);
         prisonerDAO.updateCrimeInform(prisoner);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("editCrimeInfo.jsp");
         requestDispatcher.forward(request,response);
@@ -87,22 +78,12 @@ public class PrisonerServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Prisoner prisoner = new Prisoner();
         prisoner.setId(id);
-        String name = request.getParameter("name");
-        int age = Integer.parseInt(request.getParameter("age"));
-        double height = Double.parseDouble(request.getParameter("height"));
-        double weight = Double.parseDouble(request.getParameter("weight"));
-        String address = request.getParameter("address");
-        String identification = request.getParameter("identification");
-        prisoner.setPrivateInform(new PrivateInform(name,age,height,weight,address,identification));
+        setPrivateInformByParameter(request,prisoner);
         prisonerDAO.updatePrivateInform(prisoner);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("editPrivateInform.jsp");
         requestDispatcher.forward(request,response);
     }
-
-    public void  createNewPrisoner(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String cellRoom = request.getParameter("cellRoom");
-        Prisoner prisoner = new Prisoner(id,cellRoom);
+    private void setPrivateInformByParameter(HttpServletRequest request,Prisoner prisoner){
         String name = request.getParameter("name");
         int age = Integer.parseInt(request.getParameter("age"));
         double height = Double.parseDouble(request.getParameter("height"));
@@ -110,12 +91,22 @@ public class PrisonerServlet extends HttpServlet {
         String address = request.getParameter("address");
         String identification = request.getParameter("identification");
         prisoner.setPrivateInform(new PrivateInform(name,age,height,weight,address,identification));
+    }
+    private void setCrimeInformByParameter(HttpServletRequest request,Prisoner prisoner){
         String crime = request.getParameter("crime");
         String date_arrived = request.getParameter("date_arrived");
         String date_departure = request.getParameter("date_departure");
         String judgment = request.getParameter("judgment");
         String other = request.getParameter("other");
         prisoner.setCrimeInform(new CrimeInform(crime,date_arrived,date_departure,judgment,other));
+    }
+
+    public void  createNewPrisoner(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String cellRoom = request.getParameter("cellRoom");
+        Prisoner prisoner = new Prisoner(id,cellRoom);
+        setPrivateInformByParameter(request,prisoner);
+        setCrimeInformByParameter(request,prisoner);
         prisonerDAO.createPrisoner(prisoner);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("create.jsp");
         requestDispatcher.forward(request,response);
