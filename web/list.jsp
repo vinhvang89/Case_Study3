@@ -9,17 +9,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>V.T.Jail - Danh sách tù nhân</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="css2/style.css">
 </head>
 <body>
 <div id="--header">
     <nav id="--navbar" class="navbar navbar-expand-lg navbar-light bg-transparent">
         <%--        <a class="navbar-brand" href="#">Vinh Trung Ngục</a>--%>
-        <img src="img/Reapers.png" width="50" height="50">
-        <h4 style="color: #002752; margin-left: 10px">Vinh trung ngục</h4>
+        <img src="imgs/Reapers.png" width="50" height="50">
+        <h4 style="color: #002752; margin-left: 10px">V . T . Jail</h4>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,8 +28,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="http://localhost:8080/">Trang chủ</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/index.jsp">Trang chủ</a>
                 </li>
 
                 <li class="nav-item">
@@ -44,8 +44,8 @@
                     <a class="nav-link" href="http://localhost:8080/nhat_ky.jsp">Nhật ký trong tù</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Danh sách</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://localhost:8080/abc?action=showAll">Danh sách</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -55,43 +55,59 @@
         </div>
     </nav>
 </div>
-<div align="center">
-    <h1>This is list</h1>
-    <table border="1" cellpadding="5">
-        <tr>
-            <th>Id</th>
-            <th>CellRoom</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Height</th>
-            <th>Weight</th>
-            <th>Address</th>
-            <th>Identification</th>
-            <th>Crime</th>
-            <th>Date Arrived</th>
-            <th>Date Departed</th>
-            <th>Judgment</th>
-            <th>Other</th>
-        </tr>
-        <%--        <jsp:useBean id="list" scope="request" type="java.util.List"/>--%>
-        <c:forEach var="prisoner" items="${list}">
-            <tr>
-                <td><c:out value="${prisoner.getId()}"/></td>
-                <td><c:out value="${prisoner.getCellRoom()}"/></td>
-                <td><c:out value="${prisoner.getPrivateInform().getName()}"/></td>
-                <td><c:out value="${prisoner.getPrivateInform().getAge()}"/></td>
-                <td><c:out value="${prisoner.getPrivateInform().getHeight()}"/></td>
-                <td><c:out value="${prisoner.getPrivateInform().getWeight()}"/></td>
-                <td><c:out value="${prisoner.getPrivateInform().getAddress()}"/></td>
-                <td><c:out value="${prisoner.getPrivateInform().getIdentification()}"/></td>
-                <td><c:out value="${prisoner.getCrimeInform().getCrime()}"/></td>
-                <td><c:out value="${prisoner.getCrimeInform().getDate_arrived()}"/></td>
-                <td><c:out value="${prisoner.getCrimeInform().getDate_departure()}"/></td>
-                <td><c:out value="${prisoner.getCrimeInform().getJudgment()}"/></td>
-                <td><c:out value="${prisoner.getCrimeInform().getOther()}"/></td>
-            </tr>
-        </c:forEach>
-    </table>
+
+<div id="--body">
+    <div class="sidenav">
+        <a href="http://localhost:8080/abc?action=showAll">Danh sách tù nhân</a>
+        <a href="#services">Thêm tù nhân</a>
+        <a href="#contact">Phiếu đánh giá</a>
+    </div>
+    <div id="--body-content">
+        <div id="--body-content-title">
+            <h2>Danh sách các anh hùng</h2>
+        </div>
+        <div id="--body-content-table">
+            <table border="1" cellpadding="5">
+                <tr>
+                    <th>Id</th>
+                    <th>CellRoom</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Height</th>
+                    <th>Weight</th>
+                    <th>Address</th>
+                    <th>Identification</th>
+                    <th>Crime</th>
+                    <th>Date Arrived</th>
+                    <th>Date Departed</th>
+                    <th>Judgment</th>
+                    <th>Other</th>
+                </tr>
+                <%--        <jsp:useBean id="list" scope="request" type="java.util.List"/>--%>
+                <c:forEach var="prisoner" items="${list}">
+                    <tr>
+                        <td><c:out value="${prisoner.getId()}"/></td>
+                        <td><c:out value="${prisoner.getCellRoom()}"/></td>
+                            <%--                <td><c:out value="${prisoner.name}"/></td>--%>
+                            <%--                <td><c:out value="${prisoner.age}"/></td>--%>
+                            <%--                <td><c:out value="${prisoner.height}"/></td>--%>
+                            <%--                <td><c:out value="${prisoner.weight}"/></td>--%>
+                            <%--                <td><c:out value="${prisoner.address}"/></td>--%>
+                            <%--                <td><c:out value="${prisoner.identification}"/></td>--%>
+                            <%--                <td><c:out value="${prisoner.crime}"/></td>--%>
+                            <%--                <td><c:out value="${prisoner.date_arrived}"/></td>--%>
+                            <%--                <td><c:out value="${prisoner.date_departure}"/></td>--%>
+                            <%--                <td><c:out value="${prisoner.judgment}"/></td>--%>
+                            <%--                <td><c:out value="${prisoner.other}"/></td>--%>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="--footer">
+    <h6>Copyright Vinh & Trung, 6/2020</h6>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
