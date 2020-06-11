@@ -68,7 +68,7 @@
     </div>
 
     <div id="--body-create-form">
-        <form id="--create">
+        <form id="--create" method="post">
             <div class="form-row">
                     <label for="cellRoom">New cell room</label>
                     <input type="text" class="form-control" id="cellRoom" name="cellRoom" placeholder="Cell room">
